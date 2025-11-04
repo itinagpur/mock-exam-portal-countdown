@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 ITI Portal Launch Countdown - 11:11 AM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .launch-time {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .launch-time h2 {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .launch-time p {
+            color: white;
+            font-size: 1.1em;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .countdown-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .countdown-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .features {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .features h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            font-size: 1.5em;
+        }
+
+        .feature-text {
+            color: #333;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .info-box h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: white;
+            line-height: 1.6;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .share-btn {
+            background: white;
+            color: #667eea;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .whatsapp { background: #25D366; color: white; }
+        .facebook { background: #1877F2; color: white; }
+        .twitter { background: #1DA1F2; color: white; }
+        .telegram { background: #0088cc; color: white; }
+
+        .launched {
+            display: none;
+        }
+
+        .launched.active {
+            display: block;
+        }
+
+        .launch-message {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: celebrate 1s ease-in-out;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .launch-message h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .launch-btn {
+            background: white;
+            color: #f5576c;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .fireworks {
+            font-size: 2em;
+            margin-top: 20px;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-top: 3px solid #ffd700;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer-text {
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .developer-name {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .institute-name {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        body {
+            padding-bottom: 70px; /* Space for footer */
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px 20px;
+            }
+
+            .countdown-number {
+                font-size: 2em;
+            }
+
+            .logo {
+                font-size: 50px;
+            }
+
+            .footer {
+                padding: 12px 15px;
+            }
+
+            .footer-text {
+                font-size: 0.9em;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="countdown-section">
+            <div class="logo">🎓</div>
+            <h1>ऑनलाइन मॉक टेस्ट पोर्टल</h1>
+            <h1>Online Mock Test Portal</h1>
+            <p class="subtitle">Maharashtra ITI Network</p>
+
+            <div class="launch-time">
+                <h2>⏰ LAUNCHING AT 11:11 AM</h2>
+                <p>📅 5 Nov'2025 | Indian Standard Time (IST)</p>
+            </div>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+
+            <div class="features">
+                <h3>✨ What's Coming?</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        <span class="feature-text">Unlimited Questions</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span class="feature-text">Instant Results</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📄</span>
+                        <span class="feature-text">PDF Certificates</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        <span class="feature-text">Mobile Friendly</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🆓</span>
+                        <span class="feature-text">100% FREE with selected Features Forever</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span class="feature-text">All ITI Trades</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>🎯 Our Mission</h4>
+                <p>Bringing FREE digital assessment tools to 400+ ITIs across Maharashtra, 
+                   benefiting 70,000+ students annually!</p>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 Why This Portal?</h4>
+                <p>• Saves instructors' time<br>
+                   • Zero cost to institutions<br>
+                   • Modern digital education<br>
+                   • Instant feedback for students<br>
+                   • Eco-friendly (paperless)</p>
+            </div>
+
+            <div class="share-buttons">
+                <a href="#" class="share-btn whatsapp" onclick="shareWhatsApp()">
+                    📱 Share on WhatsApp
+                </a>
+                <a href="#" class="share-btn facebook" onclick="shareFacebook()">
+                    👥 Share on Facebook
+                </a>
+                <a href="#" class="share-btn twitter" onclick="shareTwitter()">
+                    🐦 Share on Twitter
+                </a>
+            </div>
+        </div>
+
+        <div id="launched-section" class="launched">
+            <div class="launch-message">
+                <h2>🎉 WE'RE LIVE! 🎉</h2>
+                <p style="font-size: 1.3em; margin: 20px 0;">
+                    The Online Mock Test Portal is now LIVE!<br>
+                    पोर्टल आता लाइव्ह आहे!
+                </p>
+                <a href="https://script.google.com/macros/s/AKfycbz5o41Bz4SMz6Ws11nyZAOS-9rLfsz1vJY2mODZhtAVWkgdk9lZ7JZGEBulofzpw1Nd/exec" class="launch-btn" target="_blank">
+                    🚀 VISIT PORTAL NOW
+                </a>
+                <div class="fireworks">
+                    ✨ 🎊 🎆 🎉 ✨
+                </div>
+                <p style="margin-top: 30px; font-size: 1.1em;">
+                    Demo Login: demo1 / demo2024<br>
+                    100% Free | All Features Unlocked
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <span class="footer-text">💻 Developed By -</span>
+            <span class="developer-name">Anand Kathalewar</span>
+            <span class="footer-text">|</span>
+            <span class="institute-name">Govt ITI Nagpur</span>
+        </div>
+    </footer>
+
+    <script>
+        // Set launch date and time: 11:11 AM IST
+        const now = new Date();
+        const launchDate = new Date();
+        
+        // Set to 11:11 AM today
+        launchDate.setHours(11, 11, 0, 0); // 11:11:00 AM
+        
+        // If 11:11 AM has already passed today, set to tomorrow
+        if (now.getTime() > launchDate.getTime()) {
+            launchDate.setDate(launchDate.getDate() + 1); // Tomorrow
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance < 0) {
+                // Launch time reached!
+                document.getElementById('countdown-section').style.display = 'none';
+                document.getElementById('launched-section').classList.add('active');
+                return;
+            }
+
+            const hours = Math.floor(distance / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Share functions
+        function shareWhatsApp() {
+            const text = `🎓 ऑनलाइन मॉक टेस्ट पोर्टल लॉन्च होत आहे !\n\n⏰ 11:11 AM वाजता\n\n✅ पूर्णपणे विनामूल्य निवडक फिचर्ससह\n✅ तात्काळ निकाल\n✅ PDF प्रमाणपत्रे\n\nकाउंटडाउन पहा: ${window.location.href}\n\n#ITIMaharashtra #DigitalEducation`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+
+        function shareTwitter() {
+            const text = `🎓 FREE Online Mock Test Portal launching 5 Nov'2025 at 11:11 AM! Maharashtra ITI Network 🚀`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+
+        // Show launch info in console for debugging
+        console.log('Launch scheduled for:', launchDate.toString());
+        console.log('Current time:', new Date().toString());
+    </script>
+</body>
+</html>
